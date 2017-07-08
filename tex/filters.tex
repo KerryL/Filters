@@ -1,0 +1,67 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{graphicx}
+
+\begin{document}
+
+\title{Discretization of Common Filters}
+\author{K. Loux}
+\date{\today}
+\maketitle
+
+\section{Introduction}
+This document contains difference equation implementations for transfer functions of common filters. Continuous-time transfer functions can be discretized using the relationship $z = e^{sT}$, where $T$ is the sampling period, $s$ is imaginary frequency and $z$ is discretized imaginary frequency.
+
+In order for this relationship to be helpful, we need to solve for $s$, then replace all instances of $s$ in our continuous-time transfer functions with the result.  Solving for $s$, however, results in a relationship involving a natural logarithm.  We make a first-order approximation of the logarithm instead.
+
+\begin{equation}
+s = \frac{1}{T} \ln \left( z \right) \approx \frac{2}{T} \frac{1 - z^{-1}}{1 + z^{-1}}
+\end{equation}
+
+To go from a discrete-time transfer function to a difference equation, variables that are multiplied by $z^{-n}$ are replaced with the values of those variables from $n$ time steps in the past.
+
+We use the variable $u$ to represent input and $y$ to represent output from the filters.  We give all coefficients in the form of $a_0$ through $a_n$ and $b_0$ through $b_m$ where $a$ coefficients are applied to input quantities and $b$ coefficients are applied to output quantities.  All coefficients can be scaled by $1 / b_0$, so then $b_0 = 1$ and the first $b$ coefficient required to be stored will be $b_1$.  These can be used in a difference equation as shown below.
+
+\begin{equation}
+y_k = \frac{a_0 u_k + a_1 u_{k - 1} + ... + a_n u_{k - n} - b_1 y_{k - 1} - ... - b_m y_{k - m}}{b_0}
+\end{equation}
+
+\section{First Order Low-Pass Filter}
+
+Continuous-time transfer function:
+
+\begin{equation}
+\frac{Y}{U} = \frac{\omega}{s + \omega}
+\end{equation}
+
+\section{Second Order Low-Pass Filter}
+
+Continuous-time transfer function:
+
+\begin{equation}
+\frac{Y}{U} = \frac{\omega^2}{s^2 + 2 \zeta \omega s + \omega^2}
+\end{equation}
+
+Difference equation coefficients:
+
+\begin{align*}
+a_0 &= \omega^2 T^2 \\
+a_1 &= 2 a_0 \\
+a_2 &= a_0 \\
+b_0 &= 4 + 4 \zeta \omega T + \omega^2 T^2 \\
+b_1 &= 2 \omega^2 T^2 - 8 \\
+b_2 &= 4 - 4 \zeta \omega T + \omega^2 T^2
+\end{align*}
+
+\section{First Order High-Pass Filter}
+
+Continuous-time transfer function:
+
+\begin{equation}
+\frac{Y}{U} = \frac{s}{s + \omega}
+\end{equation}
+
+\end{document}
