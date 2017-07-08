@@ -37,6 +37,15 @@ Continuous-time transfer function:
 \frac{Y}{U} = \frac{\omega}{s + \omega}
 \end{equation}
 
+Difference equation coefficients:
+
+\begin{align*}
+a_0 &= \omega T \\
+a_1 &= a_0 \\
+b_0 &= \omega T + 2 \\
+b_1 &= \omega T - 2
+\end{align*}
+
 \section{Second Order Low-Pass Filter}
 
 Continuous-time transfer function:
@@ -51,9 +60,9 @@ Difference equation coefficients:
 a_0 &= \omega^2 T^2 \\
 a_1 &= 2 a_0 \\
 a_2 &= a_0 \\
-b_0 &= 4 + 4 \zeta \omega T + \omega^2 T^2 \\
+b_0 &= \omega^2 T^2 + 4 + 4 \zeta \omega T \\
 b_1 &= 2 \omega^2 T^2 - 8 \\
-b_2 &= 4 - 4 \zeta \omega T + \omega^2 T^2
+b_2 &= \omega^2 T^2 + 4 - 4 \zeta \omega T
 \end{align*}
 
 \section{First Order High-Pass Filter}
@@ -63,5 +72,14 @@ Continuous-time transfer function:
 \begin{equation}
 \frac{Y}{U} = \frac{s}{s + \omega}
 \end{equation}
+
+Difference equation coefficients:
+
+\begin{align*}
+a_0 &= 2 \\
+a_1 &= -2 \\
+b_0 &= \omega T + 2 \\
+b_1 &= \omega T - 2
+\end{align*}
 
 \end{document}
